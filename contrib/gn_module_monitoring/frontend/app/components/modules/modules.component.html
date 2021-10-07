@@ -1,0 +1,38 @@
+
+<div class="modules">
+    <pnx-modal-msg [bDisplayModal]="bLoading">
+        <h2>Chargement en cours</h2>
+        <div>
+          <span class="center spinner-border" role="status" aria-hidden="true"></span>
+        </div>
+      </pnx-modal-msg>
+
+  <h2>Modules de suivi</h2>
+
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-4 col-sm-5 col-md-4 col-lg-4 module" *ngFor="let module of modules">
+        <a [routerLink]="[
+        'object',
+        module.module_code,
+        'module',
+        module.id_module
+        ]" >
+          <div class="card module-card">
+            <img class="card-img-top"
+            src="{{assetsDirectory}}{{ module.module_code.toLowerCase()}}.jpg"
+            alt="{{ module.module_label }}"
+            title="{{ module.module_label }}"
+            >
+            <div class="card-body">
+              <h5 class="card-title">{{ module.module_label }}</h5>
+              <p class="card-text"> {{ module.module_desc }}</p>
+            </div>
+          </div>
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+</div>

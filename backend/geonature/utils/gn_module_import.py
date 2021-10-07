@@ -293,6 +293,9 @@ def install_frontend_dependencies(module_path):
     """
     Install module frontend dependencies in the GN node_modules directory
     """
+    docker = os.environ.get("DOCKER")
+    if docker:
+        return
     log.info("Installing JS dependencies...")
     frontend_module_path = Path(module_path) / "frontend"
     if (frontend_module_path / "package.json").is_file():

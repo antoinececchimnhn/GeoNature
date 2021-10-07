@@ -1,0 +1,104 @@
+{
+  "cruved": {"C":1, "U":1, "D": 1},
+  "id_field_name": "id_base_visit",
+  "chained": true,
+  "description_field_name": "visit_date_min",
+  "label": "Visite",
+  "genre": "F",
+  "uuid_field_name": "uuid_base_visit",
+  "display_properties": [
+    "id_base_site",
+    "visit_date_min",
+    "observers",
+    "comments",
+    "dataset",
+    "nb_observations"
+  ],
+  "display_list": [
+    "id_base_site",
+    "visit_date_min",
+    "observers",
+    "comments",
+    "dataset",
+    "nb_observations"
+  ],
+ 
+  "sorts": [
+    {"prop": "visit_date_min", "dir": "desc"}
+  ],
+  "generic": {
+    "id_base_visit": {
+      "type_widget": "text",
+      "attribut_label": "ID",
+      "hidden": true
+    },
+    "id_base_site": {
+      "type_widget": "text",
+      "attribut_label": "ID SITE",
+      "hidden": true
+    },
+    "id_module": {
+      "type_widget": "text",
+      "attribut_label": "ID Module",
+      "hidden": true
+    },
+    "observers": {
+      "type_widget": "datalist",
+      "attribut_label": "Observateurs",
+      "api": "users/menu/__MODULE.ID_LIST_OBSERVER",
+      "application": "GeoNature",
+      "keyValue": "id_role",
+      "keyLabel": "nom_complet",
+      "type_util": "user",
+      "multiple": true,
+      "required": true
+    },
+    "id_digitiser": {
+      "type_widget": "text",
+      "attribut_label": "Digitiser",
+      "type_util": "user",
+      "required": true,
+      "hidden": true
+    },
+    "visit_date_min": {
+      "type_widget": "date",
+      "attribut_label": "Date",
+      "required": true
+    },
+    "visit_date_max": {
+      "type_widget": "date",
+      "attribut_label": "Date (max)",
+      "hidden": true
+    },
+    "comments": {
+      "type_widget": "text",
+      "attribut_label": "Commentaires"
+    },
+    "uuid_base_visit": {
+      "attribut_label": "uuid"
+    },
+    "id_dataset": {
+      "type_widget": "datalist",
+      "attribut_label": "Jeu de données",
+      "type_util": "dataset",
+      "api": "meta/datasets",
+      "application": "GeoNature",
+      "keyValue": "id_dataset",
+      "keyLabel": "dataset_shortname",
+      "params": {
+        "orderby": "dataset_name",
+        "module_code": "__MODULE.MODULE_CODE"
+      },
+      "data_path": "data",
+      "required": true
+    },
+    "nb_observations": {
+      "attribut_label": "Nombre d'observations"
+    },
+    "medias": {
+      "type_widget": "medias",
+      "attribut_label": "Médias",
+      "schema_dot_table": "gn_monitoring.t_base_visits"
+    }
+  }
+}
