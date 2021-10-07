@@ -1,0 +1,15 @@
+FROM debian:buster
+RUN apt-get update
+RUN apt-get install -y wget
+RUN apt-get install -y python3
+RUN apt-get install -y python
+RUN mkdir /GeoNature
+WORKDIR /GeoNature
+
+EXPOSE 4200
+COPY . /GeoNature
+
+
+RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
+
+ENTRYPOINT ["sh", "entrypointfront.sh"]

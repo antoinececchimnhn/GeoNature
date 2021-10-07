@@ -1,0 +1,12 @@
+version: '3.2'
+
+services:
+  flask:
+    build:
+      context: ./
+      dockerfile: DockerfileFront
+    volumes:
+      - "$PWD/.:/GeoNature"
+    ports:
+      - "4200:4200"
+

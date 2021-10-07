@@ -1,0 +1,68 @@
+<div class="object">
+  <pnx-modal-msg [bDisplayModal]="bLoadingModal">
+    <h2>Chargement en cours</h2>
+    <div>
+      <span
+        class="center spinner-border"
+        role="status"
+        aria-hidden="true"
+      ></span>
+    </div>
+  </pnx-modal-msg>
+
+  <div class="flex-container" id="object">
+    <div id="monitoring-map-container" class="cadre">
+      <pnx-monitoring-map
+        *ngIf="heightMap"
+        [obj]="obj"
+        [bEdit]="bEdit"
+        [objForm]="objForm"
+        [(objectsStatus)]="objectsStatus"
+        [sites]="sites"
+        [heightMap]="heightMap"
+      ></pnx-monitoring-map>
+    </div>
+
+    <div id="monitoring-elem-container" class="cadre scroll">
+      <pnx-monitoring-breadcrumbs
+        *ngIf="obj && obj.bIsInitialized"
+        [obj]="obj"
+        [(bEdit)]="bEdit"
+      ></pnx-monitoring-breadcrumbs>
+
+      <div>
+        <span class='obj-title' *ngIf="obj.bIsInitialized" [innerHTML]="obj.titleHTML(this.bEdit)"></span>
+      </div>
+      <div *ngIf="!moduleSet && obj.bIsInitialized" class="alert alert-warning">
+        <p>Le module n'est pas encore configuré.</p>
+
+        <p>Veuillez éditer le module et renseigner les champs requis.</p>
+      </div>
+
+      <pnx-monitoring-properties
+        id="nav-properties"
+        [obj]="obj"
+        *ngIf="!bEdit && obj.bIsInitialized"
+        [(bEdit)]="bEdit"
+        [currentUser]="currentUser"
+      ></pnx-monitoring-properties>
+      <pnx-monitoring-form
+        [obj]="obj"
+        (objChanged)="onObjChanged($event)"
+        *ngIf="bEdit && obj?.bIsInitialized"
+        [(bEdit)]="bEdit"
+        [objForm]="objForm"
+        [currentUser]="currentUser"
+        [sites]="sites"
+      ></pnx-monitoring-form>
+
+      <pnx-monitoring-lists
+        [obj]="obj"
+        [(objectsStatus)]="objectsStatus"
+        [(bEdit)]="bEdit"
+        *ngIf="!bEdit && obj && obj.bIsInitialized && moduleSet"
+        [currentUser]="currentUser"
+      ></pnx-monitoring-lists>
+    </div>
+  </div>
+</div>

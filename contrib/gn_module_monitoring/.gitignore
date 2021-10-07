@@ -1,0 +1,22 @@
+backend/__pycache__/*
+**/__pycache__/
+frontend/app/module.config.ts
+**/node_modules
+config/conf_gn_module.toml
+.vscode
+**/custom.json
+config/monitoring/*
+!config/monitoring/generic
+frontend/assets/*.jpg
+
+
+# Node
+.npm
+node_modules
+npm-debug.log
+coverage/
+node_modules/
+tmp/
+npm-debug.log*
+yarn-error.log*
+.ng_pkg_build/

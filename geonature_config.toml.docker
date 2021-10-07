@@ -1,0 +1,30 @@
+DOCKER = true
+[CAS_PUBLIC]
+    CAS_AUTHENTIFICATION = true
+    CAS_URL_LOGIN = "https://preprod-inpn.mnhn.fr/auth/login"
+    CAS_URL_LOGOUT = "https://preprod-inpn.mnhn.fr/auth/logout"
+
+[CAS]
+    CAS_URL_VALIDATION = "https://preprod-inpn.mnhn.fr/auth/serviceValidate"
+
+[CAS.CAS_USER_WS]
+    URL = "https://preprod-inpn.mnhn.fr/authentication/information"
+    BASE_URL = "https://preprod-inpn.mnhn.fr/authentication/"
+    ID = "user1"
+    PASSWORD = "password1"
+
+[MAIL_CONFIG]
+    MAIL_DEBUG = true
+    MAIL_SERVER = 'localhost'
+    MAIL_PORT = 25
+    MAIL_USE_TLS = false
+    MAIL_USE_SSL = false
+
+[USERSHUB]
+    # URL de l'application Usershub
+    URL_USERSHUB = "http://localhost/usershub"
+    # Identifiant et mot de passe d'un compte 'Administrateur' dans UsersHub
+    ADMIN_APPLICATION_LOGIN = "admin"
+    ADMIN_APPLICATION_PASSWORD = "admin"
+
+

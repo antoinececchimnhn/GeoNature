@@ -107,6 +107,46 @@ Pour cela GeoNature s'appuie sur l'application TaxHub et sa structure de BDD
 qui est dupliquée dans le schéma ``taxonomie``.
 Détails sur `<https://github.com/PnX-SI/TaxHub>`_
 
+======
+Docker
+======
+L'installation de GeoNature requiert la mise en place d'une base de données et d'un reverse proxy. Ces services sont mis
+à disposition via la code disponible dans le repository "infra-as-code"
+
+Installation
+------------
+
+En cas de première installation, mettre la variable INSTALL_DB à true dans le fichier .env.local
+
+L'installation se fait ensuite via la commande: :
+
+    docker-compose -p geonature -f docker-compose.yml up --build
+
+En cas d'oubli de la INSTALL_DB avant de lancer geonature, il est possible de mettre à jour la base de manière manuelle: :
+
+    docker exec -it geonature_flask_1 bash
+
+    cd install
+
+    chmod +x add_extensions.sh
+
+    ./add_extensions.sh
+
+    geonature db upgrade geonature@head -x data-directory=tmp/ -x local-srid=$srid_local
+
+    chmod +x install_initial_data.sh
+
+    ./install_initial_data.sh
+
+Relancer ensuite la commande docker compose.
+
+L'application est ensuite disponible sur localhost/geonature/api
+
+
+
+/!\ certains modules ont besoin de taxhub pour fonctionner, une version dockerisée existe sur le repo taxhub.
+
+
 .. image:: https://geonature.fr/documents/logo-geonature.jpg
     :target: https://geonature.fr
 
