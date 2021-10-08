@@ -79,7 +79,9 @@ then
   cd $BASE_DIR
 fi
 echo "Migration de la base de donées Alembic"
-geonature db upgrade geonature@head -x data-directory=tmp/ -x local-srid=$srid_local
+for branch in geonature utilisateurs nomenclatures taxonomie nomenclatures_taxonomie habitats ref_geo; do
+    geonature db upgrade $branch@head -x data-directory=tmp/ -x local-srid=$srid_local
+done
 if [ "$INSTALL_DB" = true ];
 echo "installing inital data"
   then
@@ -91,6 +93,42 @@ fi
 cd $BASE_DIR
 echo "Lancement de l'application api backend..."
 geonature generate_frontend_config --build=false
+
+cd "${BASE_DIR}"
+
+geonature install_packaged_gn_module "${BASE_DIR}/contrib/occtax" OCCTAX --build=false
+if [ "$add_sample_data" = true ];
+then
+    geonature db upgrade occtax-samples@head
+fi
+if [ "$INSTALL_OCCHAB" = true ];
+  then
+  geonature install_packaged_gn_module "${BASE_DIR}/contrib/gn_module_occhab" OCCHAB --build=false
+    if [ "$add_sample_data" = true ];
+    then
+        geonature db upgrade occhab-samples@head
+    fi
+fi
+if [ "$INSTALL_VALIDATION" = true ];
+  then
+    geonature install_packaged_gn_module "${BASE_DIR}/contrib/gn_module_validation" VALIDATION --build=false
+fi
+if [ "$INSTALL_IMPORT" = true ];
+  then
+    geonature install_gn_module "${BASE_DIR}/contrib/gn_module_import" /import --build=false
+fi
+if [ "$INSTALL_EXPORT" = true ];
+  then
+    geonature install_gn_module "${BASE_DIR}/contrib/gn_module_export" /export --build=false
+fi
+if [ "$INSTALL_DASHBOARD" = true ];
+  then
+    geonature install_gn_module "${BASE_DIR}/contrib/gn_module_dashboard" /dashboard --build=false
+fi
+if [ "$INSTALL_MONITORING" = true ];
+  then
+    geonature install_gn_module "${BASE_DIR}/contrib/gn_module_monitoring" /monitorings --build=false
+fi
 # Préparation du frontend
 
 # Lien symbolique vers le dossier static du backend (pour le backoffice)
@@ -117,35 +155,7 @@ geonature generate_frontend_tsconfig_app
 geonature generate_frontend_modules_route
 
 # Retour à la racine de GeoNature
-cd "${BASE_DIR}"
-if [ "$INSTALL_OCCTAX" = true ];
-  then
- geonature install_gn_module "${BASE_DIR}/contrib/occtax" /occtax --build=false
-fi
-if [ "$INSTALL_OCCHAB" = true ];
-  then
-    geonature install_gn_module "${BASE_DIR}/contrib/gn_module_occhab" /occhab --build=false
-fi
-if [ "$INSTALL_VALIDATION" = true ];
-  then
-    geonature install_gn_module "${BASE_DIR}/contrib/gn_module_validation" /validation --build=false
-fi
-if [ "$INSTALL_IMPORT" = true ];
-  then
-    geonature install_gn_module "${BASE_DIR}/contrib/gn_module_import" /import --build=false
-fi
-if [ "$INSTALL_EXPORT" = true ];
-  then
-    geonature install_gn_module "${BASE_DIR}/contrib/gn_module_export" /export --build=false
-fi
-if [ "$INSTALL_DASHBOARD" = true ];
-  then
-    geonature install_gn_module "${BASE_DIR}/contrib/gn_module_dashboard" /dashboard --build=false
-fi
-if [ "$INSTALL_MONITORING" = true ];
-  then
-    geonature install_gn_module "${BASE_DIR}/contrib/gn_module_monitoring" /monitorings --build=false
-fi
+
 
 exec gunicorn "geonature:create_app()"  -w 4  -b 0.0.0.0:80  #-n "${app_name}" #https://testdriven.io/blog/dockerizing-flask-with-postgres-gunicorn-and-nginx/
 
