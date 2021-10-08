@@ -118,7 +118,7 @@ Installation
 
 En cas de première installation, mettre la variable INSTALL_DB à true dans le fichier .env.local
 
-L'installation se fait ensuite via la commande: :
+L'installation du backend se fait ensuite via la commande: :
 
     docker-compose -p geonature -f docker-compose.yml up --build
 
@@ -132,7 +132,9 @@ En cas d'oubli de la INSTALL_DB avant de lancer geonature, il est possible de me
 
     ./add_extensions.sh
 
-    geonature db upgrade geonature@head -x data-directory=tmp/ -x local-srid=$srid_local
+    for branch in geonature utilisateurs nomenclatures taxonomie nomenclatures_taxonomie habitats ref_geo; do
+        geonature db upgrade $branch@head -x data-directory=tmp/ -x local-srid=$srid_local
+    done
 
     chmod +x install_initial_data.sh
 
@@ -142,6 +144,11 @@ Relancer ensuite la commande docker compose.
 
 L'application est ensuite disponible sur localhost/geonature/api
 
+L'installation du frontend en local se fait pour sa part depuis le même repository: :
+
+    docker-compose -p frontend -f docker-compose-front.yml up --build
+
+Geonature est ensuite disponible sur localhost:4200
 
 
 /!\ certains modules ont besoin de taxhub pour fonctionner, une version dockerisée existe sur le repo taxhub.
