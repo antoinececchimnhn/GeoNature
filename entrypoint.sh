@@ -2,6 +2,8 @@
 echo "Nom de la base de données entrypoint"
 echo $db_name
 
+rm -rf external_modules/occtax
+
 my_domain=$(echo $my_url | sed -r 's|^.*\/\/(.*)$|\1|')
 my_domain=$(echo $my_domain | sed s'/.$//')
 

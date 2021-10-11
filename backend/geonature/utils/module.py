@@ -22,6 +22,7 @@ def import_legacy_module(module_object):
         module_dist = module_object.module_code.lower()
         module_dir = GN_EXTERNAL_MODULE / module_dist
         manifest_path = module_dir / 'manifest.toml'
+        print(manifest_path)
         if not manifest_path.is_file():
             raise NoManifestFound()
         module_manifest = load_and_validate_toml(manifest_path, ManifestSchemaProdConf)

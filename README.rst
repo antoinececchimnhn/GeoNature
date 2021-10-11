@@ -151,7 +151,7 @@ L'installation du frontend en local se fait pour sa part depuis le même reposit
 Geonature est ensuite disponible sur localhost:4200
 
 
-/!\ certains modules ont besoin de taxhub pour fonctionner, une version dockerisée existe sur le repo taxhub.
+/!\\ Certains modules ont besoin de taxhub pour fonctionner, une version dockerisée existe sur le repo taxhub.
 
 
 .. image:: https://geonature.fr/documents/logo-geonature.jpg

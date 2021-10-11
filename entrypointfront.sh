@@ -25,6 +25,6 @@ npm install .
 
 echo "Build du frontend..."
 
-npm rebuild node-sass --force
+#npm rebuild node-sass --force
 npm run docker_start
 
