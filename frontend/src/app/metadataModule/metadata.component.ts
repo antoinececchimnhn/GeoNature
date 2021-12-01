@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PageEvent, MatPaginator } from '@angular/material';
+import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { CruvedStoreService } from '../GN2CommonModule/service/cruved-store.service';
 import { AppConfig } from '@geonature_config/app.config';
 import { Router, NavigationExtras } from "@angular/router";
@@ -21,7 +21,7 @@ import { MetadataService } from './services/metadata.service';
 })
 export class MetadataComponent implements OnInit {
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   /* getter this.metadataService.filteredAcquisitionFrameworks */
   acquisitionFrameworks: Observable<any[]>;
@@ -47,7 +47,7 @@ export class MetadataComponent implements OnInit {
   pageSize: number;
   pageIndex: number;
 
-  
+
 
   constructor(
     public _cruvedStore: CruvedStoreService,
@@ -85,7 +85,7 @@ export class MetadataComponent implements OnInit {
 
   setDsObservationCount(datasets, dsNbObs) {
     datasets.forEach(ds=> {
-      let foundDS = dsNbObs.find(d => {                
+      let foundDS = dsNbObs.find(d => {
         return d.id_dataset == ds.id_dataset
       })
       if (foundDS) {
@@ -115,13 +115,13 @@ export class MetadataComponent implements OnInit {
 
   //     }
   //     // load stat for ds
-  //     if (!this.datasetNbObs) {        
+  //     if (!this.datasetNbObs) {
   //       this._syntheseDataService.getObsCountByColumn('id_dataset').subscribe(count_ds => {
   //         this.datasetNbObs = count_ds
   //         this.setDsObservationCount(this.datasets, this.datasetNbObs);
-          
+
   //       })
-  //     } else {        
+  //     } else {
   //       this.setDsObservationCount(this.datasets, this.datasetNbObs);
   //     }
 
@@ -150,7 +150,7 @@ export class MetadataComponent implements OnInit {
   //       af.datasetsTemp = af.datasets;
   //       return true;
   //     } else {
-        
+
   //       // expand tous les accordeons recherchés pour voir le JDD des CA
   //       this.expandAccordions = true;
   //       if ((af.id_acquisition_framework + ' ').toLowerCase().indexOf(searchTerm) !== -1
@@ -181,8 +181,8 @@ export class MetadataComponent implements OnInit {
   //   this.activePage = 0;
   // }
 
-  
-  
+
+
   refreshFilters() {
     this.metadataService.resetForm();
     this.advancedSearch();
@@ -245,7 +245,7 @@ export class MetadataComponent implements OnInit {
             'error', "Une erreur s'est produite lors de la fermeture du cadre d'acquisition. Contactez l'administrateur"
             )
         }
-        
+
 
     }
     )
