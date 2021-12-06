@@ -97,7 +97,7 @@ export class ValidationModalInfoObsComponent implements OnInit {
   }
 
 
-  changeObsIndex(increment: bigint) {
+  changeObsIndex(increment: number) {
     // add 1 to find new position
     this.position = this.filteredIds.indexOf(this.id_synthese) + increment;
     // disable next button if last observation
